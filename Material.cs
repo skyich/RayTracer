@@ -8,18 +8,26 @@ namespace RayTracer
 {
     public class Material
     {
-        public Vec3f DiffuseColor;
-        public float SpecularExponent;
-        //Истинное или плоское альбедо — коэффициент диффузного отражения
-        public Vec4f Albedo;
-        public float RefractiveIndex;
+        public float RefIndex;
+        public Vec3f DiffColor;
+        public float SpecExp;
+        public float[] Albedo;
 
-        public Material (float refractive, Vec4f albedo, Vec3f color, float specular)
+        public Material(float refIndex, float[] albedo, Vec3f diffColor, float specExp)
         {
-            RefractiveIndex = refractive;
+            RefIndex = refIndex;
             Albedo = albedo;
-            DiffuseColor = color;
-            SpecularExponent = specular;
+            DiffColor = diffColor;
+            SpecExp = specExp;
+        }
+
+        public Material()
+        {
+            RefIndex = 1;
+            SpecExp = 0;
+            Albedo = new[] { 1f, 0f, 0f, 0f };
+
+            DiffColor = new Vec3f();
         }
     }
 }

@@ -8,67 +8,69 @@ namespace RayTracer
 {
     public class Vec3f
     {
-        public float X;
-        public float Y;
-        public float Z;
+        public float x;
+        public float y;
+        public float z;
 
         public Vec3f(float x, float y, float z)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
 
-        public static Vec3f operator -(Vec3f c1, Vec3f c2)
+        public Vec3f()
         {
-            return new Vec3f(c1.X - c2.X, c1.Y - c2.Y, c1.Z - c2.Z);
         }
 
-        public static Vec3f operator -(Vec3f c1)
+        public float this[int i]
         {
-            return c1 * (-1);
+            get { return i <= 0 ? x : (i == 1 ? y : z); }
         }
 
-        public static Vec3f operator +(Vec3f c1, Vec3f c2)
+        public float norm()
         {
-            return new Vec3f(c1.X + c2.X, c1.Y + c2.Y, c1.Z + c2.Z);
+            return (float)Math.Sqrt(x * x + y * y + z * z);
         }
 
-        public static float operator *(Vec3f c1, Vec3f c2)
+        public Vec3f normalize()
         {
-            return c1.X * c2.X + c1.Y * c2.Y + c1.Z * c2.Z;
+            return this / norm();
         }
 
-        public static Vec3f operator *(Vec3f c1, float c2)
+        public float[] ToArray()
         {
-            return new Vec3f(c1.X * c2, c1.Y * c2, c1.Z * c2);
+            return new[] { x, y, z };
         }
 
-        // Нормализация вектора
-        public Vec3f Normalize(int l = 1)
+        public static Vec3f operator +(Vec3f self, Vec3f other)
         {
-            return this * (l / Norm());
+            return new Vec3f(self.x + other.x, self.y + other.y, self.z + other.z);
         }
 
-        public float Norm()
+        public static Vec3f operator -(Vec3f self, Vec3f other)
         {
-            return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
+            return new Vec3f(self.x - other.x, self.y - other.y, self.z - other.z);
         }
-    }
 
-    public class Vec4f
-    {
-        public float X1;
-        public float X2;
-        public float X3;
-        public float X4;
-
-        public Vec4f(float x1, float x2, float x3, float x4)
+        public static float operator *(Vec3f self, Vec3f other)
         {
-            X1 = x1;
-            X2 = x2;
-            X3 = x3;
-            X4 = x4;
+            return self.x * other.x + self.y * other.y + self.z * other.z;
+        }
+
+        public static Vec3f operator *(Vec3f self, float value)
+        {
+            return new Vec3f(self.x * value, self.y * value, self.z * value);
+        }
+
+        public static Vec3f operator /(Vec3f self, float value)
+        {
+            return self * (1f / value);
+        }
+
+        public static Vec3f operator -(Vec3f self)
+        {
+            return self * -1f;
         }
     }
 }

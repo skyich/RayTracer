@@ -8,13 +8,13 @@ namespace RayTracer
 {
     public class Light
     {
-        public Vec3f Position;
-        public float Intensity;
+        public Vec3f position;
+        public float intensity;
 
         public Light(Vec3f position, float intensity)
         {
-            Position = position;
-            Intensity = intensity;
+            this.position = position;
+            this.intensity = intensity;
         }
     }
 }
